@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Your Project Title</title>
+  <meta name="description" content="Project page for Your Project Title" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Noto+Sans:wght@400;500;700&family=Castoro:ital@0;1&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #ffffff;
+      --text: #1f2937;
+      --muted: #6b7280;
+      --line: #e5e7eb;
+      --accent: #2563eb;
+      --accent-soft: #eff6ff;
+      --card: #f8fafc;
+      --shadow: 0 12px 30px rgba(15, 23, 42, 0.08);
+      --radius: 18px;
+      --container: 1100px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Noto Sans", system-ui, sans-serif;
+      line-height: 1.65;
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    a:hover { text-decoration: underline; }
+
+    .container {
+      width: min(calc(100% - 32px), var(--container));
+      margin: 0 auto;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(14px);
+      background: rgba(255,255,255,0.84);
+      border-bottom: 1px solid rgba(229,231,235,0.9);
+    }
+
+    .topbar-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 14px 0;
+    }
+
+    .brand {
+      font-family: "Google Sans", sans-serif;
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: -0.02em;
+    }
+
+    .nav {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      font-size: 0.95rem;
+    }
+
+    .hero {
+      padding: 64px 0 28px;
+      text-align: center;
+    }
+
+    .title {
+      margin: 0 auto 14px;
+      max-width: 900px;
+      font-family: "Google Sans", sans-serif;
+      font-size: clamp(2rem, 4.2vw, 3.5rem);
+      line-height: 1.05;
+      letter-spacing: -0.04em;
+    }
+
+    .subtitle {
+      margin: 0 auto 22px;
+      max-width: 850px;
+      color: var(--muted);
+      font-size: 1.08rem;
+    }
+
+    .authors, .affiliations {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px 18px;
+      margin: 10px auto;
+    }
+
+    .authors a {
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    .pill-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+      margin: 26px 0 0;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 11px 16px;
+      border-radius: 999px;
+      background: #111827;
+      color: white;
+      font-weight: 600;
+      box-shadow: var(--shadow);
+    }
+
+    .pill.secondary {
+      background: white;
+      color: var(--text);
+      border: 1px solid var(--line);
+    }
+
+    .section {
+      padding: 32px 0;
+    }
+
+    .section-title {
+      margin: 0 0 18px;
+      font-family: "Google Sans", sans-serif;
+      font-size: 1.75rem;
+      letter-spacing: -0.03em;
+      text-align: center;
+    }
+
+    .section-lead {
+      max-width: 840px;
+      margin: 0 auto 24px;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .media-frame {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background: linear-gradient(135deg, #dbeafe, #f8fafc 55%, #ede9fe);
+      display: grid;
+      place-items: center;
+      color: #334155;
+      font-weight: 600;
+      text-align: center;
+      padding: 24px;
+    }
+
+    .media-frame img,
+    .media-frame iframe,
+    .media-frame video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border: 0;
+      display: block;
+    }
+
+    .caption {
+      padding: 14px 18px;
+      font-size: 0.96rem;
+      color: var(--muted);
+      background: white;
+      border-top: 1px solid var(--line);
+    }
+
+    .abstract {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 28px;
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      font-size: 1.02rem;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .result-card .media-frame {
+      aspect-ratio: 4 / 3;
+    }
+
+    .result-card h3 {
+      margin: 0;
+      padding: 16px 18px 6px;
+      font-size: 1.1rem;
+      font-family: "Google Sans", sans-serif;
+    }
+
+    .result-card p {
+      margin: 0;
+      padding: 0 18px 18px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .citation {
+      max-width: 900px;
+      margin: 0 auto;
+      background: #0f172a;
+      color: #e2e8f0;
+      border-radius: var(--radius);
+      padding: 22px;
+      overflow-x: auto;
+      box-shadow: var(--shadow);
+    }
+
+    pre {
+      margin: 0;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 0.92rem;
+      line-height: 1.55;
+      white-space: pre-wrap;
+    }
+
+    footer {
+      padding: 36px 0 60px;
+      color: var(--muted);
+      text-align: center;
+      font-size: 0.95rem;
+    }
+
+    .small {
+      font-size: 0.92rem;
+      color: var(--muted);
+    }
+
+    @media (max-width: 900px) {
+      .grid-3, .grid-2 {
+        grid-template-columns: 1fr;
+      }
+
+      .topbar-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <div class="brand">YourProject</div>
+      <nav class="nav">
+        <a href="#abstract">Abstract</a>
+        <a href="#video">Video</a>
+        <a href="#results">Results</a>
+        <a href="#citation">BibTeX</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero container">
+      <h1 class="title">Your Project Title in Nerfies-Inspired Style</h1>
+      <p class="subtitle">
+        A clean academic project page for GitHub Pages with a centered hero section,
+        author list, quick links, teaser media, results gallery, and citation block.
+      </p>
+
+      <div class="authors">
+        <a href="#">Author One</a>
+        <a href="#">Author Two</a>
+        <a href="#">Author Three</a>
+        <a href="#">Author Four</a>
+      </div>
+
+      <div class="affiliations small">
+        <span>University / Lab 1</span>
+        <span>•</span>
+        <span>University / Lab 2</span>
+      </div>
+
+      <div class="pill-links">
+        <a class="pill" href="#">Paper</a>
+        <a class="pill secondary" href="#">Code</a>
+        <a class="pill secondary" href="#">Dataset</a>
+        <a class="pill secondary" href="#video">Video</a>
+      </div>
+    </section>
+
+    <section class="section container">
+      <div class="card">
+        <div class="media-frame">
+          Replace this block with a teaser image, GIF, or embedded video.
+        </div>
+        <div class="caption">
+          Teaser: add a short one-line explanation of the main idea, result, or contribution.
+        </div>
+      </div>
+    </section>
+
+    <section id="abstract" class="section">
+      <div class="container">
+        <h2 class="section-title">Abstract</h2>
+        <div class="abstract">
+          Write a concise abstract here. A Nerfies-style page usually highlights the main contribution,
+          explains the core method in accessible language, and emphasizes what the viewer should notice
+          in the demos. Keep this section readable, direct, and visually centered.
+        </div>
+      </div>
+    </section>
+
+    <section id="video" class="section">
+      <div class="container">
+        <h2 class="section-title">Video</h2>
+        <p class="section-lead">Embed your project video, talk, or demo reel below.</p>
+        <div class="card">
+          <div class="media-frame">
+            <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Project video" allowfullscreen></iframe>
+          </div>
+          <div class="caption">Replace the YouTube link in the iframe with your actual video.</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="results" class="section">
+      <div class="container">
+        <h2 class="section-title">Results</h2>
+        <p class="section-lead">Use cards for qualitative examples, comparisons, or application cases.</p>
+        <div class="grid-3">
+          <article class="card result-card">
+            <div class="media-frame">Result 1 image / gif</div>
+            <h3>Example One</h3>
+            <p>Describe what this result shows and why it matters.</p>
+          </article>
+          <article class="card result-card">
+            <div class="media-frame">Result 2 image / gif</div>
+            <h3>Example Two</h3>
+            <p>Highlight the model behavior, comparison, or improvement.</p>
+          </article>
+          <article class="card result-card">
+            <div class="media-frame">Result 3 image / gif</div>
+            <h3>Example Three</h3>
+            <p>Use a short caption that makes the visual understandable on its own.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <h2 class="section-title">Method Overview</h2>
+        <div class="grid-2">
+          <div class="card">
+            <div class="media-frame">Pipeline figure</div>
+            <div class="caption">Add your method diagram here.</div>
+          </div>
+          <div class="card">
+            <div class="media-frame">Comparison figure</div>
+            <div class="caption">Add an ablation or baseline comparison here.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="citation" class="section">
+      <div class="container">
+        <h2 class="section-title">BibTeX</h2>
+        <div class="citation">
+<pre>@inproceedings{yourproject2026,
+  title     = {Your Project Title},
+  author    = {Author One and Author Two and Author Three},
+  booktitle = {Conference Name},
+  year      = {2026}
+}</pre>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="container">
+    <p>
+      This page is inspired by the visual structure popularized by academic project websites such as Nerfies.
+    </p>
+    <p>
+      Replace all placeholder text, media, and links before publishing.
+    </p>
+  </footer>
+</body>
+</html>
