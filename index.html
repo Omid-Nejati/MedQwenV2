@@ -382,30 +382,34 @@
       </div>
     </section>
 
-    <section class="section container">
-      <div class="grid-3">
+  <section class="section container">
+      <div class="grid-2">
         <article class="mini-card">
           <div class="figure">
-            <img src="assets/catastrophic.png" alt="Catastrophic forgetting figure" onerror="this.style.display='none'; this.parentNode.innerHTML='Add <strong>assets/catastrophic.png</strong> here (paper Figure 5).';">
+            <img src="assets/figure5_forgetting.png" alt="Catastrophic forgetting figure" onerror="this.style.display='none'; this.parentNode.innerHTML='Add <strong>assets/figure5_forgetting.png</strong> here (paper Figure 5).';">
           </div>
           <h3>Catastrophic Forgetting</h3>
           <p>Sequential tuning on Harvard-FairVLMed then PathVQA shows only about a 5% drop for MedQwen, versus much larger drops for standard LoRA and MoELoRA.</p>
         </article>
         <article class="mini-card">
           <div class="figure">
-            <img src="assets/loss.png" alt="Convergence and scalability" onerror="this.style.display='none'; this.parentNode.innerHTML='Add <strong>assets/loss.png</strong> here (paper Figure 6).';">
+            <img src="assets/figure6_scaling.png" alt="Convergence and scalability" onerror="this.style.display='none'; this.parentNode.innerHTML='Add <strong>assets/figure6_scaling.png</strong> here (paper Figure 6).';">
           </div>
           <h3>Convergence and Rank Scaling</h3>
           <p>MedQwen converges faster than LoRA-MoE baselines and narrows the gap to full fine-tuning as rank increases.</p>
         </article>
-        <article class="mini-card">
-          <div class="figure">
-            <img src="assets/visualization.png" alt="Qualitative examples" onerror="this.style.display='none'; this.parentNode.innerHTML='Add <strong>assets/visualization.png</strong> here (paper Figure S5).';">
-          </div>
-          <h3>Qualitative Examples</h3>
-          <p>MedQwen answers medical questions across multiple modalities and generates medical reports for chest X-ray images.</p>
-        </article>
       </div>
+    </section>
+
+    <!-- Separate Qualitative Examples (full-width below) -->
+    <section class="section container">
+      <article class="mini-card" style="max-width:900px;margin:0 auto;">
+        <div class="figure">
+          <img src="assets/visualization.png" alt="Qualitative examples" onerror="this.style.display='none'; this.parentNode.innerHTML='Add <strong>assets/visualization.png</strong> here.';">
+        </div>
+        <h3 style="text-align:center;">Qualitative Examples</h3>
+        <p style="text-align:center;">MedQwen answers medical questions across multiple modalities and generates medical reports for chest X-ray images.</p>
+      </article>
     </section>
 
     <section class="section">
