@@ -3,29 +3,25 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Your Project Title</title>
-  <meta name="description" content="Project page for Your Project Title" />
+  <title>MedQwen: Sparse Spectral LoRA for Medical VLMs</title>
+  <meta name="description" content="Project page for MedQwen: Sparse Spectral LoRA: Routed Experts for Medical VLMs" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Noto+Sans:wght@400;500;700&family=Castoro:ital@0;1&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Noto+Sans:wght@400;500;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #ffffff;
-      --text: #1f2937;
-      --muted: #6b7280;
+      --text: #111827;
+      --muted: #4b5563;
       --line: #e5e7eb;
+      --bg: #ffffff;
       --accent: #2563eb;
-      --accent-soft: #eff6ff;
-      --card: #f8fafc;
-      --shadow: 0 12px 30px rgba(15, 23, 42, 0.08);
-      --radius: 18px;
-      --container: 1100px;
+      --soft: #f8fafc;
+      --maxw: 1100px;
+      --shadow: 0 8px 28px rgba(15, 23, 42, 0.08);
     }
 
     * { box-sizing: border-box; }
-
     html { scroll-behavior: smooth; }
-
     body {
       margin: 0;
       background: var(--bg);
@@ -33,378 +29,407 @@
       font-family: "Noto Sans", system-ui, sans-serif;
       line-height: 1.65;
     }
-
-    a {
-      color: var(--accent);
-      text-decoration: none;
-    }
-
+    img { max-width: 100%; display: block; }
+    a { color: var(--accent); text-decoration: none; }
     a:hover { text-decoration: underline; }
 
     .container {
-      width: min(calc(100% - 32px), var(--container));
+      width: min(calc(100% - 32px), var(--maxw));
       margin: 0 auto;
     }
 
-    .topbar {
-      position: sticky;
-      top: 0;
-      z-index: 20;
-      backdrop-filter: blur(14px);
-      background: rgba(255,255,255,0.84);
-      border-bottom: 1px solid rgba(229,231,235,0.9);
-    }
-
-    .topbar-inner {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      padding: 14px 0;
-    }
-
-    .brand {
-      font-family: "Google Sans", sans-serif;
-      font-weight: 700;
-      color: var(--text);
-      letter-spacing: -0.02em;
-    }
-
-    .nav {
-      display: flex;
-      gap: 16px;
-      flex-wrap: wrap;
-      font-size: 0.95rem;
-    }
-
     .hero {
-      padding: 64px 0 28px;
+      padding: 56px 0 24px;
       text-align: center;
     }
 
     .title {
-      margin: 0 auto 14px;
-      max-width: 900px;
+      margin: 0 auto 10px;
+      max-width: 980px;
       font-family: "Google Sans", sans-serif;
-      font-size: clamp(2rem, 4.2vw, 3.5rem);
-      line-height: 1.05;
+      font-size: clamp(2rem, 4.3vw, 3.6rem);
+      line-height: 1.06;
       letter-spacing: -0.04em;
     }
 
-    .subtitle {
-      margin: 0 auto 22px;
-      max-width: 850px;
-      color: var(--muted);
-      font-size: 1.08rem;
-    }
-
-    .authors, .affiliations {
+    .authors, .affiliations, .venue {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 10px 18px;
-      margin: 10px auto;
+      gap: 8px 14px;
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 1rem;
     }
 
-    .authors a {
-      color: var(--text);
-      font-weight: 500;
-    }
+    .authors a { color: var(--text); font-weight: 500; }
 
-    .pill-links {
+    .links {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
       gap: 12px;
-      margin: 26px 0 0;
+      margin-top: 24px;
     }
 
-    .pill {
+    .button {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
+      justify-content: center;
       padding: 11px 16px;
       border-radius: 999px;
+      border: 1px solid var(--line);
       background: #111827;
       color: white;
       font-weight: 600;
       box-shadow: var(--shadow);
     }
 
-    .pill.secondary {
+    .button.alt {
       background: white;
       color: var(--text);
-      border: 1px solid var(--line);
     }
 
     .section {
-      padding: 32px 0;
+      padding: 26px 0;
     }
 
-    .section-title {
-      margin: 0 0 18px;
+    h2 {
+      margin: 0 0 12px;
+      text-align: center;
       font-family: "Google Sans", sans-serif;
-      font-size: 1.75rem;
+      font-size: 1.9rem;
       letter-spacing: -0.03em;
-      text-align: center;
     }
 
-    .section-lead {
-      max-width: 840px;
-      margin: 0 auto 24px;
-      color: var(--muted);
+    .lead {
+      max-width: 860px;
+      margin: 0 auto 20px;
       text-align: center;
+      color: var(--muted);
     }
 
     .card {
-      background: var(--card);
+      background: white;
       border: 1px solid var(--line);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
+      border-radius: 22px;
       overflow: hidden;
+      box-shadow: var(--shadow);
     }
 
-    .media-frame {
-      position: relative;
-      width: 100%;
-      aspect-ratio: 16 / 9;
-      background: linear-gradient(135deg, #dbeafe, #f8fafc 55%, #ede9fe);
+    .teaser-badge {
+      display: inline-block;
+      margin-bottom: 16px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: var(--soft);
+      color: var(--muted);
+      font-size: 0.95rem;
+      font-weight: 600;
+    }
+
+    .figure {
+      background: linear-gradient(135deg, #eff6ff, #f8fafc 55%, #eef2ff);
       display: grid;
       place-items: center;
-      color: #334155;
-      font-weight: 600;
-      text-align: center;
-      padding: 24px;
-    }
-
-    .media-frame img,
-    .media-frame iframe,
-    .media-frame video {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      border: 0;
-      display: block;
+      min-height: 260px;
+      padding: 18px;
     }
 
     .caption {
       padding: 14px 18px;
       font-size: 0.96rem;
       color: var(--muted);
-      background: white;
       border-top: 1px solid var(--line);
+      background: white;
     }
 
     .abstract {
-      max-width: 860px;
+      max-width: 920px;
       margin: 0 auto;
       padding: 28px;
-      background: white;
       border: 1px solid var(--line);
-      border-radius: var(--radius);
+      border-radius: 22px;
       box-shadow: var(--shadow);
-      font-size: 1.02rem;
+      background: white;
     }
 
-    .grid-3 {
+    .bullets {
+      max-width: 920px;
+      margin: 0 auto;
+      padding-left: 20px;
+    }
+
+    .grid-2, .grid-3 {
       display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 20px;
     }
 
-    .grid-2 {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 20px;
+    .grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+
+    .mini-card {
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      overflow: hidden;
+      background: white;
+      box-shadow: var(--shadow);
     }
 
-    .result-card .media-frame {
-      aspect-ratio: 4 / 3;
-    }
-
-    .result-card h3 {
+    .mini-card h3 {
       margin: 0;
-      padding: 16px 18px 6px;
-      font-size: 1.1rem;
+      padding: 14px 16px 6px;
+      font-size: 1.05rem;
       font-family: "Google Sans", sans-serif;
     }
 
-    .result-card p {
+    .mini-card p {
       margin: 0;
-      padding: 0 18px 18px;
+      padding: 0 16px 16px;
       color: var(--muted);
       font-size: 0.95rem;
     }
 
-    .citation {
-      max-width: 900px;
-      margin: 0 auto;
-      background: #0f172a;
-      color: #e2e8f0;
-      border-radius: var(--radius);
-      padding: 22px;
+    .results-table-wrap {
       overflow-x: auto;
+      border: 1px solid var(--line);
+      border-radius: 18px;
       box-shadow: var(--shadow);
+      background: white;
     }
 
-    pre {
-      margin: 0;
-      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-      font-size: 0.92rem;
-      line-height: 1.55;
-      white-space: pre-wrap;
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 760px;
+      background: white;
     }
 
-    footer {
-      padding: 36px 0 60px;
-      color: var(--muted);
+    th, td {
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--line);
       text-align: center;
       font-size: 0.95rem;
     }
 
-    .small {
+    th {
+      background: var(--soft);
+      font-family: "Google Sans", sans-serif;
+    }
+
+    td:first-child, th:first-child { text-align: left; }
+
+    .bibtex {
+      max-width: 950px;
+      margin: 0 auto;
+      padding: 22px;
+      border-radius: 20px;
+      background: #0f172a;
+      color: #e5e7eb;
+      box-shadow: var(--shadow);
+      overflow-x: auto;
+    }
+
+    pre {
+      margin: 0;
+      white-space: pre-wrap;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
       font-size: 0.92rem;
+      line-height: 1.6;
+    }
+
+    footer {
+      padding: 36px 0 60px;
+      text-align: center;
       color: var(--muted);
+      font-size: 0.95rem;
     }
 
     @media (max-width: 900px) {
-      .grid-3, .grid-2 {
-        grid-template-columns: 1fr;
-      }
-
-      .topbar-inner {
-        flex-direction: column;
-        align-items: flex-start;
-      }
+      .grid-2, .grid-3 { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
-  <header class="topbar">
-    <div class="container topbar-inner">
-      <div class="brand">YourProject</div>
-      <nav class="nav">
-        <a href="#abstract">Abstract</a>
-        <a href="#video">Video</a>
-        <a href="#results">Results</a>
-        <a href="#citation">BibTeX</a>
-      </nav>
-    </div>
-  </header>
-
   <main>
     <section class="hero container">
-      <h1 class="title">Your Project Title in Nerfies-Inspired Style</h1>
-      <p class="subtitle">
-        A clean academic project page for GitHub Pages with a centered hero section,
-        author list, quick links, teaser media, results gallery, and citation block.
-      </p>
+      <div class="teaser-badge">Medical Vision-Language Model · LoRA-MoE · Continual Learning</div>
+      <h1 class="title">Sparse Spectral LoRA: Routed Experts for Medical VLMs</h1>
 
       <div class="authors">
-        <a href="#">Author One</a>
-        <a href="#">Author Two</a>
-        <a href="#">Author Three</a>
-        <a href="#">Author Four</a>
+        <a href="#">Omid Nejati Manzari</a>
+        <a href="#">Hojat Asgariandehkordi</a>
+        <a href="#">Taha Koleilat</a>
+        <a href="#">Yiming Xiao</a>
+        <a href="#">Hassan Rivaz</a>
       </div>
 
-      <div class="affiliations small">
-        <span>University / Lab 1</span>
-        <span>•</span>
-        <span>University / Lab 2</span>
+      <div class="affiliations">
+        <span>Concordia University, Montreal, Canada</span>
       </div>
 
-      <div class="pill-links">
-        <a class="pill" href="#">Paper</a>
-        <a class="pill secondary" href="#">Code</a>
-        <a class="pill secondary" href="#">Dataset</a>
-        <a class="pill secondary" href="#video">Video</a>
+      <div class="venue">
+        <span>Project Page for MedQwen</span>
+      </div>
+
+      <div class="links">
+        <a class="button" href="MedQwen-11.pdf">Paper</a>
+        <a class="button alt" href="https://github.com/Omid-Nejati/MedQwen">Code</a>
+        <a class="button alt" href="#results">Results</a>
+        <a class="button alt" href="#bibtex">BibTeX</a>
       </div>
     </section>
 
     <section class="section container">
       <div class="card">
-        <div class="media-frame">
-          Replace this block with a teaser image, GIF, or embedded video.
+        <div class="figure">
+          <img src="assets/medqwen_teaser.png" alt="MedQwen teaser figure" onerror="this.style.display='none'; this.parentNode.innerHTML='Add <strong>assets/medqwen_teaser.png</strong> here (recommended: Figure 1 or a composite teaser).';">
         </div>
         <div class="caption">
-          Teaser: add a short one-line explanation of the main idea, result, or contribution.
+          MedQwen is a parameter-efficient medical VLM that uses spectrally routed LoRA experts to improve robustness across heterogeneous medical datasets and to reduce catastrophic forgetting.
         </div>
       </div>
     </section>
 
-    <section id="abstract" class="section">
+    <section class="section" id="abstract">
       <div class="container">
-        <h2 class="section-title">Abstract</h2>
+        <h2>Abstract</h2>
         <div class="abstract">
-          Write a concise abstract here. A Nerfies-style page usually highlights the main contribution,
-          explains the core method in accessible language, and emphasizes what the viewer should notice
-          in the demos. Keep this section readable, direct, and visually centered.
+          Large vision-language models excel on general benchmarks but often lack robustness in medical imaging, where heterogeneous supervision induces cross-dataset interference and sensitivity to the training data regime. In realistic clinical workflows, data and tasks also arrive sequentially, making catastrophic forgetting a major challenge. MedQwen addresses these issues with a parameter-efficient medical VLM that combines a spectrally routed Mixture-of-Experts with a theoretically grounded scaling rule that aligns low-rank updates with a full-rank, fully fine-tuned MoE. Each expert is initialized from a distinct non-overlapping SVD segment of the pretrained weights, and a lightweight router activates only the most relevant experts for a given input. Across 23 medical datasets spanning VQA, report generation, radiology classification, and hallucination mitigation, MedQwen achieves strong performance while remaining efficient, approaching full fine-tuning on zero-shot classification with 339× fewer trainable parameters and reducing sequential forgetting to about 5%.
         </div>
       </div>
     </section>
 
-    <section id="video" class="section">
+    <section class="section" id="method">
       <div class="container">
-        <h2 class="section-title">Video</h2>
-        <p class="section-lead">Embed your project video, talk, or demo reel below.</p>
-        <div class="card">
-          <div class="media-frame">
-            <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Project video" allowfullscreen></iframe>
+        <h2>Method</h2>
+        <p class="lead">The page structure follows the clean project-page style used by MedCLIPSeg: hero, abstract, method overview, figures, results, and BibTeX.</p>
+        <ul class="bullets">
+          <li><strong>Sparse spectral LoRA:</strong> partitions pretrained weights into non-overlapping spectral segments and routes inputs to the most relevant experts.</li>
+          <li><strong>Adaptive priors initialization:</strong> assigns distinct SVD-based priors to different experts for expert specialization.</li>
+          <li><strong>Optimization alignment:</strong> introduces residual matching and scaling to align LoRA-MoE updates with full MoE training dynamics.</li>
+          <li><strong>Unified medical VLM:</strong> supports medical VQA, report generation, zero-shot classification, and hallucination mitigation.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section container">
+      <div class="grid-2">
+        <div class="mini-card">
+          <div class="figure">
+            <img src="assets/figure2_method.png" alt="Overview of MedQwen" onerror="this.style.display='none'; this.parentNode.innerHTML='Add <strong>assets/figure2_method.png</strong> here (paper Figure 2).';">
           </div>
-          <div class="caption">Replace the YouTube link in the iframe with your actual video.</div>
+          <div class="caption">Overall architecture of MedQwen, including routed LoRA experts and adaptive priors initialization.</div>
+        </div>
+        <div class="mini-card">
+          <div class="figure">
+            <img src="assets/figure4_alignment.png" alt="Optimization alignment" onerror="this.style.display='none'; this.parentNode.innerHTML='Add <strong>assets/figure4_alignment.png</strong> here (paper Figure 4).';">
+          </div>
+          <div class="caption">Optimization with SVD-structured MoE by separately aligning each expert.</div>
         </div>
       </div>
     </section>
 
-    <section id="results" class="section">
+    <section class="section" id="results">
       <div class="container">
-        <h2 class="section-title">Results</h2>
-        <p class="section-lead">Use cards for qualitative examples, comparisons, or application cases.</p>
-        <div class="grid-3">
-          <article class="card result-card">
-            <div class="media-frame">Result 1 image / gif</div>
-            <h3>Example One</h3>
-            <p>Describe what this result shows and why it matters.</p>
-          </article>
-          <article class="card result-card">
-            <div class="media-frame">Result 2 image / gif</div>
-            <h3>Example Two</h3>
-            <p>Highlight the model behavior, comparison, or improvement.</p>
-          </article>
-          <article class="card result-card">
-            <div class="media-frame">Result 3 image / gif</div>
-            <h3>Example Three</h3>
-            <p>Use a short caption that makes the visual understandable on its own.</p>
-          </article>
+        <h2>Selected Results</h2>
+        <p class="lead">MedQwen reports strong performance across medical VQA, report generation, zero-shot classification, and continual learning.</p>
+
+        <div class="results-table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Model</th>
+                <th>VQA-RAD</th>
+                <th>SLAKE</th>
+                <th>PathVQA</th>
+                <th>OMVQA</th>
+                <th>Avg.</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Qwen-2.5-VL 7B</td>
+                <td>61.8 / 27.2</td>
+                <td>64.7 / 36.7</td>
+                <td>60.5 / 33.4</td>
+                <td>60.8</td>
+                <td>49.3</td>
+              </tr>
+              <tr>
+                <td>HealthGPT-L14</td>
+                <td>74.5 / 54.5</td>
+                <td>71.9 / 56.2</td>
+                <td>75.2 / 42.1</td>
+                <td>67.2</td>
+                <td>63.1</td>
+              </tr>
+              <tr>
+                <td><strong>MedQwen</strong></td>
+                <td><strong>78.8 / 59.6</strong></td>
+                <td><strong>75.3 / 59.9</strong></td>
+                <td><strong>84.2 / 49.1</strong></td>
+                <td><strong>70.6</strong></td>
+                <td><strong>68.2</strong></td>
+              </tr>
+            </tbody>
+          </table>
         </div>
+      </div>
+    </section>
+
+    <section class="section container">
+      <div class="grid-3">
+        <article class="mini-card">
+          <div class="figure">
+            <img src="assets/figure5_forgetting.png" alt="Catastrophic forgetting figure" onerror="this.style.display='none'; this.parentNode.innerHTML='Add <strong>assets/figure5_forgetting.png</strong> here (paper Figure 5).';">
+          </div>
+          <h3>Catastrophic Forgetting</h3>
+          <p>Sequential tuning on Harvard-FairVLMed then PathVQA shows only about a 5% drop for MedQwen, versus much larger drops for standard LoRA and MoELoRA.</p>
+        </article>
+        <article class="mini-card">
+          <div class="figure">
+            <img src="assets/figure6_scaling.png" alt="Convergence and scalability" onerror="this.style.display='none'; this.parentNode.innerHTML='Add <strong>assets/figure6_scaling.png</strong> here (paper Figure 6).';">
+          </div>
+          <h3>Convergence and Rank Scaling</h3>
+          <p>MedQwen converges faster than LoRA-MoE baselines and narrows the gap to full fine-tuning as rank increases.</p>
+        </article>
+        <article class="mini-card">
+          <div class="figure">
+            <img src="assets/figureS5_examples.png" alt="Qualitative examples" onerror="this.style.display='none'; this.parentNode.innerHTML='Add <strong>assets/figureS5_examples.png</strong> here (paper Figure S5).';">
+          </div>
+          <h3>Qualitative Examples</h3>
+          <p>MedQwen answers medical questions across multiple modalities and generates medical reports for chest X-ray images.</p>
+        </article>
       </div>
     </section>
 
     <section class="section">
       <div class="container">
-        <h2 class="section-title">Method Overview</h2>
+        <h2>Highlights</h2>
         <div class="grid-2">
-          <div class="card">
-            <div class="media-frame">Pipeline figure</div>
-            <div class="caption">Add your method diagram here.</div>
+          <div class="mini-card">
+            <h3>Zero-Shot Classification</h3>
+            <p>On nine radiology benchmarks, MedQwen reaches 58.83 average accuracy and achieves about 95.31% of full FT MoE performance while using 339× fewer trainable parameters.</p>
           </div>
-          <div class="card">
-            <div class="media-frame">Comparison figure</div>
-            <div class="caption">Add an ablation or baseline comparison here.</div>
+          <div class="mini-card">
+            <h3>Report Generation</h3>
+            <p>MedQwen improves over prior methods on MIMIC-CXR and IU-Xray, with strong gains in F1-RadGraph, BLEU-1, ROUGE, and CheXbert.</p>
           </div>
         </div>
       </div>
     </section>
 
-    <section id="citation" class="section">
+    <section class="section" id="bibtex">
       <div class="container">
-        <h2 class="section-title">BibTeX</h2>
-        <div class="citation">
-<pre>@inproceedings{yourproject2026,
-  title     = {Your Project Title},
-  author    = {Author One and Author Two and Author Three},
-  booktitle = {Conference Name},
-  year      = {2026}
+        <h2>BibTeX</h2>
+        <div class="bibtex">
+<pre>@article{nejati2026medqwen,
+  title   = {Sparse Spectral LoRA: Routed Experts for Medical VLMs},
+  author  = {Omid Nejati Manzari and Hojat Asgariandehkordi and Taha Koleilat and Yiming Xiao and Hassan Rivaz},
+  journal = {arXiv preprint},
+  year    = {2026}
 }</pre>
         </div>
       </div>
@@ -412,12 +437,8 @@
   </main>
 
   <footer class="container">
-    <p>
-      This page is inspired by the visual structure popularized by academic project websites such as Nerfies.
-    </p>
-    <p>
-      Replace all placeholder text, media, and links before publishing.
-    </p>
+    <p>Website style adapted from a clean academic project-page layout.</p>
+    <p>Place your extracted paper figures inside an <code>assets/</code> folder and keep this file as <code>index.html</code> in the repository root.</p>
   </footer>
 </body>
 </html>
