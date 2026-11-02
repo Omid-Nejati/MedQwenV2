@@ -1,0 +1,16 @@
+{"task": "seg", "image": "im0.png", "mask": "mask0.png", "prompt": "Segment the bright circular object in this image."}
+{"task": "vqa", "image": "im0.png", "prompt": "Is there a bright circular object in the image?", "answer": "Yes."}
+{"task": "classification", "image": "im0.png", "prompt": "Classify whether a bright circular object is present. Reply yes or no.", "answer": "yes"}
+{"task": "report", "image": "im0.png", "prompt": "Describe the geometric image in one sentence.", "answer": "A bright circular shape is visible on a dark background."}
+{"task": "seg", "image": "im1.png", "mask": "mask1.png", "prompt": "Segment the bright circular object in this image."}
+{"task": "vqa", "image": "im1.png", "prompt": "Is there a bright circular object in the image?", "answer": "Yes."}
+{"task": "classification", "image": "im1.png", "prompt": "Classify whether a bright circular object is present. Reply yes or no.", "answer": "yes"}
+{"task": "report", "image": "im1.png", "prompt": "Describe the geometric image in one sentence.", "answer": "A bright circular shape is visible on a dark background."}
+{"task": "seg", "image": "im2.png", "mask": "mask2.png", "prompt": "Segment the bright circular object in this image."}
+{"task": "vqa", "image": "im2.png", "prompt": "Is there a bright circular object in the image?", "answer": "Yes."}
+{"task": "classification", "image": "im2.png", "prompt": "Classify whether a bright circular object is present. Reply yes or no.", "answer": "yes"}
+{"task": "report", "image": "im2.png", "prompt": "Describe the geometric image in one sentence.", "answer": "A bright circular shape is visible on a dark background."}
+{"task": "seg", "image": "im3.png", "mask": "mask3.png", "prompt": "Segment the bright circular object in this image."}
+{"task": "vqa", "image": "im3.png", "prompt": "Is there a bright circular object in the image?", "answer": "Yes."}
+{"task": "classification", "image": "im3.png", "prompt": "Classify whether a bright circular object is present. Reply yes or no.", "answer": "yes"}
+{"task": "report", "image": "im3.png", "prompt": "Describe the geometric image in one sentence.", "answer": "A bright circular shape is visible on a dark background."}
